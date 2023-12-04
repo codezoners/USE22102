@@ -28,10 +28,12 @@ function preload() {
 function setup() {
   createCanvas(SIZE, SIZE)
   
-  // Once all images are loaded, we can resize them before we start using them.
+  // Once all images are loaded, we can resize them before we start using them. (Vestigial: we can set size when drawing)
+  // But: might need to resize if we start sampling within
+  // images (and don't know the original size)
   // (We can also apply a filter for fun...)
   for (var img of images) {
-    img.resize(SIZE / 2, SIZE / 2)
+    //img.resize(SIZE / 2, SIZE / 2)
     //img.filter(INVERT)
   }
   
@@ -52,7 +54,7 @@ function draw() {
   var leftSelection = int(second() / 10) 
   //var leftSelection = 0
   var img = images[leftSelection]
-  image(img, 0, SIZE / 4)
+  image(img, 0, SIZE / 4, SIZE / 2, SIZE / 2)
   
   textSize(36)
   text(leftSelection, width / 4, SIZE - 100)
@@ -60,6 +62,6 @@ function draw() {
   var rightSelection = second() % 10
   //var rightSelection = 0
   img = images[rightSelection]
-  image(img, SIZE / 2, SIZE / 4)
+  image(img, SIZE / 2, SIZE / 4, SIZE / 2, SIZE / 2)
   text(rightSelection, width * 3 / 4, SIZE - 100)
 }
